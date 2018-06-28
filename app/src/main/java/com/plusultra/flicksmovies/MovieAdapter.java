@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.plusultra.flicksmovies.models.Config;
 import com.plusultra.flicksmovies.models.Movie;
 
@@ -64,8 +63,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         String imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
 
         //load image using Glide
-        Glide.with(context)
+        GlideApp.with(context)
                 .load(imageUrl)
+                .placeholder(R.drawable.flicks_movie_placeholder)
+                .error(R.drawable.flicks_movie_placeholder)
                 .into(viewHolder.ivPosterImage);
     }
 
