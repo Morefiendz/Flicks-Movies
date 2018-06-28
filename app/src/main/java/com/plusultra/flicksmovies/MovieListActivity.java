@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.plusultra.flicksmovies.models.Config;
 import com.plusultra.flicksmovies.models.Movie;
 
 import org.json.JSONArray;
@@ -31,16 +32,15 @@ public class MovieListActivity extends AppCompatActivity {
 
     //instance fields
     AsyncHttpClient client;
-    //base url for images
-    String imageBaseUrl;
-    //poster size
-    String posterSize;
+
     //currently playing movies
     ArrayList<Movie> movies;
     //the recycler view
     RecyclerView rvMovies;
     //the adapter ired to the recycler view
     MovieAdapter adapter;
+    //image config
+    Config config;
 
 
     @Override
@@ -112,11 +112,12 @@ public class MovieListActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
                 try {
-                    JSONObject images = response.getJSONObject("images");
-                    imageBaseUrl = images.getString("secure_base_url");
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-                    posterSize = posterSizeOptions.optString(3, "w342");
-                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s", imageBaseUrl, posterSize));
+                    config = new Config(response);
+                    Log.i(TAG, String.format("Loaded configuration with imageBaseUrl %s and posterSize %s",
+                            config.getImageBaseUrl(),
+                            config.getPosterSize()));
+                    //pass config to adapter
+                    adapter.setConfig(config);
                     //get the now playing movie list
                     getNowPlaying();
                 } catch (JSONException e) {
