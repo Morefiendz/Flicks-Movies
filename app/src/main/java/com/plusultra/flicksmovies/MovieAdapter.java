@@ -50,7 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         //get context from the inflater
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        //create the view using the item_moview layout
+        //create the view using the item_movie layout
         View movieView = inflater.inflate(R.layout.item_movie, parent, false);
         //return new ViewHolder
         return new ViewHolder(movieView);
@@ -66,13 +66,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         viewHolder.tvOverview.setText(movie.getOverview());
 
         //determine orientation
-        boolean isPortait = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        boolean isPortrait = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 
         //build url for image
         String imageUrl = null;
 
         //change url based on orientation
-        if (isPortait) {
+        if (isPortrait) {
             imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
         } else {
             //if orientation is landscape
@@ -80,8 +80,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         }
 
         //get the correct placeholder and image view for orientation
-        int placeholderId = isPortait ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
-        ImageView imageView = isPortait ? viewHolder.ivPosterImage : viewHolder.ivBackdropImage;
+        int placeholderId = isPortrait ? R.drawable.flicks_movie_placeholder : R.drawable.flicks_backdrop_placeholder;
+        ImageView imageView = isPortrait ? viewHolder.ivPosterImage : viewHolder.ivBackdropImage;
 
         //load image using Glide
         GlideApp.with(context)

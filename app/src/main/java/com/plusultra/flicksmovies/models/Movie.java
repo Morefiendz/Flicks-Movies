@@ -7,8 +7,8 @@ import org.parceler.Parcel;
 @Parcel //annotation indicates class is Parcelable
 public class Movie {
     //values from the API
-    String title, overview, posterPath, backdropPath;
-    double voteAverage;
+    public String title, overview, posterPath, backdropPath;
+    public double voteAverage;
 
     public Movie() {}
 
