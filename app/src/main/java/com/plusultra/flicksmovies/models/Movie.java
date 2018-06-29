@@ -2,16 +2,23 @@ package com.plusultra.flicksmovies.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel //annotation indicates class is Parcelable
 public class Movie {
     //values from the API
-    private String title, overview, posterPath, backdropPath;
+    String title, overview, posterPath, backdropPath;
+    double voteAverage;
+
+    public Movie() {}
 
     public Movie(JSONObject object) throws JSONException {
         title = object.getString("title");
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
         backdropPath = object.getString("backdrop_path");
+        voteAverage = object.getDouble("vote_average");
+
     }
 
     public String getTitle() {
@@ -28,5 +35,9 @@ public class Movie {
 
     public String getBackdropPath() {
         return backdropPath;
+    }
+
+    public double getVoteAverage() {
+        return voteAverage;
     }
 }
