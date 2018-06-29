@@ -5,12 +5,13 @@ import org.json.JSONObject;
 
 public class Movie {
     //values from the API
-    private String title, overview, posterPath;
+    private String title, overview, posterPath, backdropPath;
 
     public Movie(JSONObject object) throws JSONException {
         title = object.getString("title");
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
+        backdropPath = object.getString("backdrop_path");
     }
 
     public String getTitle() {
@@ -23,5 +24,9 @@ public class Movie {
 
     public String getPosterPath() {
         return posterPath;
+    }
+
+    public String getBackdropPath() {
+        return backdropPath;
     }
 }
