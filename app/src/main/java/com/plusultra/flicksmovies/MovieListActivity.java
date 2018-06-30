@@ -42,7 +42,6 @@ public class MovieListActivity extends AppCompatActivity {
     //image config
     Config config;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
